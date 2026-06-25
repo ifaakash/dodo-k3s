@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dodobe
+  namespace: dodo
+spec:
+ replicas: 1
+ selector:
+   matchLabels:
+     # match the labels for containers
+     app: dodobe
+ template:
+  metadata:
+    labels:
+      # labels for containers
+      app: dodobe
+ spec:
+   containers:
+      - name: dodobe
+        image: localhost:5000/dodo-backend:latest
+        ports:
+          - containerPort: 3002
+        env:
+          # MongoDB connection — uses the headless service DNS name
+          # Format: mongodb://<user>:<pass>@<service>.<namespace>.svc.cluster.local:27017/<db>?authSource=admin
+          - name: MONGODB_URI
+            value: "mongodb://dodo:dodopassword@mongo-svc.dodo.svc.cluster.local:27017/test?authSource=admin"
+          - name: PORT
+            value: "1998"
+          - name: NODE_ENV
+            value: "production"
+          - name: JWT_SECRET
+            value: "change-this-to-a-real-secret"
+          # Add your other env vars (AWS, email, AI key) as needed
