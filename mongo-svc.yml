@@ -6,7 +6,7 @@ metadata:
 spec:
   clusterIP: None
   selector:
-    app: dodo-mongodb
+    app: mongo
   ports:
    - port: 27017
      targetPort: 27017

@@ -14,7 +14,8 @@ spec:
     labels:
       # labels for containers
       app: dodobe
- spec:
+      namespace: dodo
+  spec:
    containers:
       - name: dodobe
         image: localhost:5000/dodo-backend:latest
@@ -24,11 +25,15 @@ spec:
           # MongoDB connection — uses the headless service DNS name
           # Format: mongodb://<user>:<pass>@<service>.<namespace>.svc.cluster.local:27017/<db>?authSource=admin
           - name: MONGODB_URI
-            value: "mongodb://dodo:dodopassword@mongo-svc.dodo.svc.cluster.local:27017/test?authSource=admin"
+            value: "mongodb://dodo:dodopassword@mongo-db-svc.dodo.svc.cluster.local:27017/test?authSource=admin"
           - name: PORT
-            value: "1998"
+            value: "3002"
           - name: NODE_ENV
             value: "production"
           - name: JWT_SECRET
-            value: "change-this-to-a-real-secret"
+            value: "REDACTED_KEY"
+          - name: BASE_URL
+            value: "https://api.dodoclub.in"
+          - name: AI_API_KEY
+            value: "REDACTED_API_KEY"
           # Add your other env vars (AWS, email, AI key) as needed

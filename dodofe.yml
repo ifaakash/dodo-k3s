@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: dodofe
+ namespace: dodo
+spec:
+ replicas: 1
+ selector:
+  matchLabels:
+    app: dodofe
+ template:
+  metadata:
+    labels:
+      app: dodofe
+  spec:
+    containers:
+      - name: dodofe
+        image: localhost:5000/dodo-frontend:latest
+        ports:
+          - containerPort: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+ name: dodofe-svc
+ namespace: dodo
+spec:
+  selector:
+    app: dodofe
+  ports:
+   - port: 3000
+     targetPort: 3000

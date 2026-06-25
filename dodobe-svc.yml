@@ -1,6 +1,6 @@
 apiVersion: v1
 kind: Service
-  metadata:
+metadata:
     name: dodobe-svc
     namespace: dodo
 spec:
@@ -9,5 +9,5 @@ spec:
   selector:
     app: dodobe
   ports:
-   - port: 1998
-     targetPort: 1998
+   - port: 3002
+     targetPort: 3002
